@@ -11,7 +11,7 @@ config.rec = "ms1-mv3-asian-face"
 # Margin Base Softmax
 config.margin_list = (1.0, 0.0, 0.4)
 config.network = "ghostfacenets"
-config.resume = False
+config.resume = True
 config.checkpoint = 9
 config.save_all_states = True
 config.output = "ms1mv3_asian_arcface_ghostfacenets"
@@ -70,4 +70,4 @@ config.wandb_log_all = True
 config.save_artifacts = True
 config.wandb_resume = "must" # resume wandb run: Only if the you wand t resume the last run that it was interrupted
 config.wandb_id = "bdx6o42y"
-config.wandb_resume_status =False
+config.wandb_resume_status =True
