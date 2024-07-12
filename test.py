@@ -39,39 +39,6 @@ def t():
     import torch;
     a = torch.ones(1, device="cuda")
 if __name__ =='__main__' :
-    # def count_classes(file_path):
-    #     class_set = set()
-    #
-    #     with open(file_path, 'r') as file:
-    #         for line in file:
-    #             parts = line.strip().split()
-    #             if len(parts) < 2:
-    #                 continue  # Bỏ qua dòng không hợp lệ
-    #             class_id = parts[1]
-    #             print(parts[1])
-    #             class_set.add(class_id)
-    #     print(class_set)
-    #     return len(class_set)
-    #
-    #
-    # # Thay 'train.lst' bằng đường dẫn tới file của bạn
-    # file_path = 'small_dataset/train.lst'
-    # total_classes = count_classes(file_path)
-    # print(f'Tổng số lớp: {total_classes}')import os
-    import os
-    # Đường dẫn đến thư mục chứa các thư mục con cần đổi tên
-    parent_dir = 'VILFWCut'
-
-    # Lấy danh sách các thư mục con
-    subdirs = [d for d in os.listdir(parent_dir) if os.path.isdir(os.path.join(parent_dir, d))]
-
-    # Sắp xếp danh sách các thư mục con
-    subdirs.sort()
-    print(subdirs)
-
-
-    for i, subdir in enumerate(subdirs):
-        new_name = str(i + 1)
-        old_path = os.path.join(parent_dir, subdir)
-        new_path = os.path.join(parent_dir, new_name)
-        os.rename(old_path, new_path)
+    import cv2
+    img = cv2.imread("image/2634.jpg")
+    print(img)

@@ -53,7 +53,7 @@ config.gradient_acc = 1
 config.seed = 2048
 
 # dataload numworkers
-config.num_workers = 1
+config.num_workers = 4
 # dataset
 config.num_classes = 6579
 config.num_image = 300000
