@@ -195,8 +195,7 @@ def main(cfg):
                         'Process/Epoch': epoch,
                         'Learning rate/Step': opt.param_groups[0]["lr"]
                     })
-                print("loss/step", loss.item(), global_step)
-                print("loss_am",loss_am.avg,global_step)
+
 
                 callback_logging(global_step, loss_am, epoch, cfg.fp16, lr_scheduler.get_last_lr()[0], amp)
 

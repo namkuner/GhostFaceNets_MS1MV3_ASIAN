@@ -57,38 +57,21 @@ if __name__ =='__main__' :
     # # Thay 'train.lst' bằng đường dẫn tới file của bạn
     # file_path = 'small_dataset/train.lst'
     # total_classes = count_classes(file_path)
-    # print(f'Tổng số lớp: {total_classes}')
-    import wandb
-    from configs.ghostfacenets import config as cfg
-    from datetime import datetime
-    rank =0
-    try:
-        wandb.login(key=cfg.wandb_key)
-    except Exception as e:
-        print("WandB Key must be provided in config file (base.py).")
-        print(f"Config Error: {e}")
-    run_name = datetime.now().strftime("%y%m%d_%H%M") + f"_GPU{rank}"
-    run_name = run_name if cfg.suffix_run_name is None else run_name + f"_{cfg.suffix_run_name}"
+    # print(f'Tổng số lớp: {total_classes}')import os
+    import os
+    # Đường dẫn đến thư mục chứa các thư mục con cần đổi tên
+    parent_dir = 'VILFWCut'
 
-    if cfg.wandb_resume_status:
-        wandb_logger = wandb.init(
-            entity=cfg.wandb_entity,
-            project=cfg.wandb_project,
-            sync_tensorboard=True,
-            resume="must",
-            id=cfg.wandb_id
-        ) if rank == 0 or cfg.wandb_log_all else None
-        if wandb_logger:
-            wandb_logger.config.update(cfg)
+    # Lấy danh sách các thư mục con
+    subdirs = [d for d in os.listdir(parent_dir) if os.path.isdir(os.path.join(parent_dir, d))]
 
-    else:
-        wandb_logger = wandb.init(
-            entity=cfg.wandb_entity,
-            project=cfg.wandb_project,
-            sync_tensorboard=True,
-            name=run_name,
-            resume=False
-        ) if rank == 0 or cfg.wandb_log_all else None
+    # Sắp xếp danh sách các thư mục con
+    subdirs.sort()
+    print(subdirs)
 
-        if wandb_logger:
-            wandb_logger.config.update(cfg,allow_val_change=True)
+
+    for i, subdir in enumerate(subdirs):
+        new_name = str(i + 1)
+        old_path = os.path.join(parent_dir, subdir)
+        new_path = os.path.join(parent_dir, new_name)
+        os.rename(old_path, new_path)

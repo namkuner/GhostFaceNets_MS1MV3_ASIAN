@@ -26,7 +26,7 @@ config.fp16 = False
 config.batch_size = 8
 
 config.data_dir = "VILFWCut"
-config.pair_path = "eval/output.csv"
+config.pair_path = "eval/output1.csv"
 
 # For SGD
 config.optimizer = "sgd"
