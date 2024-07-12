@@ -55,8 +55,8 @@ config.seed = 2048
 # dataload numworkers
 config.num_workers = 1
 # dataset
-config.num_classes = 198#6579
-config.num_image = 10046
+config.num_classes = 6579
+config.num_image = 300000
 config.num_epoch = 20
 config.warmup_epoch = 0
 config.val_targets =[]
