@@ -167,3 +167,4 @@ wandb/
 ms1-mv3-asian-face/
 test_dataset/
 small_dataset/
+credentials.json
