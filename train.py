@@ -2,6 +2,9 @@
 import torch
 import os
 import argparse
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+import os
 
 from torch.utils.data import DataLoader
 
@@ -24,6 +27,7 @@ from utils.utils_callbacks import CallBackLogging, CallBackVerification
 from torch.nn import  CrossEntropyLoss
 from eval import vilfw
 import pandas as pd
+from uploadggdr import uploadDrive
 #GPU memory
 # torch.cuda.empty_cache()
 # for key in os.environ.keys():
@@ -39,6 +43,8 @@ world_size = 1
 def main(cfg):
     # get config
     # cfg = get_config(args.config)
+    gauth = GoogleAuth()
+    drive = GoogleDrive(gauth)
     print("line 31: config: {}".format(cfg))
     # global control random seed
     setup_seed(seed=cfg.seed, cuda_deterministic=False)
@@ -141,7 +147,7 @@ def main(cfg):
     for key, value in cfg.items():
         num_space = 25 - len(key)
         logging.info(": " + key + " " * num_space + str(value))
-
+    highest_acc = 0
 
     callback_logging = CallBackLogging(
         frequent=cfg.frequent,
@@ -202,6 +208,23 @@ def main(cfg):
                 if global_step % cfg.verbose == 0 and global_step > 0:
 
                     callback_verification(global_step, backbone)
+                    if epoch > 0.9*cfg.epoch :
+                        if highest_acc >loss_am.avg:
+                            checkpoint = {
+                                "epoch": epoch + 1,
+                                "global_step": global_step,
+                                "state_dict_backbone": backbone.state_dict(),
+                                "state_dict_softmax_fc": margin_model.state_dict(),
+                                "state_optimizer": opt.state_dict(),
+                                "state_lr_scheduler": lr_scheduler.state_dict(),
+                                "author": "namkuner"
+                            }
+                            torch.save(checkpoint, os.path.join(cfg.output, "best.pt"))
+                            ckpt =[]
+                            ckpt.append(os.path.join(cfg.output, "best.pt") )
+                            uploadDrive(drive,ckpt)
+
+
 
 
         if cfg.save_all_states:
@@ -215,6 +238,9 @@ def main(cfg):
                 "author" : "namkuner"
             }
             torch.save(checkpoint, os.path.join(cfg.output, f"checkpoint_{epoch}.pt"))
+            ckpt = []
+            ckpt.append(os.path.join(cfg.output, f"checkpoint_{epoch}.pt"))
+            uploadDrive(drive, ckpt)
 
         path_module = os.path.join(cfg.output, "model.pt")
         torch.save(backbone.state_dict(), path_module)
@@ -224,6 +250,7 @@ def main(cfg):
             model = wandb.Artifact(artifact_name, type='model')
             model.add_file(path_module)
             wandb_logger.log_artifact(model)
+
 
     if rank == 0:
         path_module = os.path.join(cfg.output, "model.pt")
@@ -240,6 +267,11 @@ if __name__ == '__main__':
     torch.backends.cudnn.benchmark = True
     # parser = argparse.ArgumentParser(description="Distributed Arcface Training in Pytorch")
     # parser.add_argument("config", type=str, help="py config file")
+
+
+
+
+
     from configs.ghostfacenets import config
     main(config)
 

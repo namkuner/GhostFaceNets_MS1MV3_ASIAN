@@ -14,3 +14,4 @@ setuptools==69.5.1
 tensorboardX==2.6.2.2
 tqdm==4.66.4
 wandb
+pydriver

@@ -39,6 +39,4 @@ def t():
     import torch;
     a = torch.ones(1, device="cuda")
 if __name__ =='__main__' :
-    import cv2
-    img = cv2.imread("image/2634.jpg")
-    print(img)
+    pass

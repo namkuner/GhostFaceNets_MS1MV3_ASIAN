@@ -60,6 +60,13 @@ config.num_image = 300000
 config.num_epoch = 20
 config.warmup_epoch = 0
 config.val_targets =[]
+
+#for glint 180k
+# config.num_classes = 180855
+# config.num_image = 6753545
+# config.num_epoch = 40
+# config.warmup_epoch = 0
+# config.val_targets =[]
 # WandB Logger
 config.wandb_key = "daa38a012f1993bc802203d31f828a53c6605938"
 config.suffix_run_name = None
