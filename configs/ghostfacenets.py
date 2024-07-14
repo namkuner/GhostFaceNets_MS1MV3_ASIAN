@@ -24,16 +24,16 @@ config.sample_rate = 1
 config.interclass_filtering_threshold = 0
 
 config.fp16 = False
-config.batch_size = 512
+config.batch_size = 256
 
 config.data_dir = "VILFWCut"
-config.pair_path = "eval/output.csv"
+config.pair_path = "eval/output1.csv"
 
 # For SGD
 config.optimizer = "sgd"
-config.lr = 0.02
+config.lr = 0.1
 config.momentum = 0.9
-config.weight_decay = 5e-4
+config.weight_decay = 0.0001
 
 # For AdamW
 # config.optimizer = "adamw"
@@ -77,7 +77,7 @@ config.val_targets =[]
 # WandB Logger
 config.wandb_key = "daa38a012f1993bc802203d31f828a53c6605938"
 config.suffix_run_name = None
-config.using_wandb = False
+config.using_wandb = True
 config.wandb_entity = "namkunerr"
 config.wandb_project = "GhostFaceNets on Asian and MS1MV3 Dataset"
 config.wandb_log_all = True

@@ -30,9 +30,9 @@ config.pair_path = "eval/output1.csv"
 
 # For SGD
 config.optimizer = "sgd"
-config.lr = 0.01
+config.lr = 0.1
 config.momentum = 0.9
-config.weight_decay = 5e-4
+config.weight_decay = 0.0001
 
 # For AdamW
 # config.optimizer = "adamw"
