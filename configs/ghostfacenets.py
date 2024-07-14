@@ -23,7 +23,7 @@ config.sample_rate = 1
 config.interclass_filtering_threshold = 0
 
 config.fp16 = False
-config.batch_size = 8
+config.batch_size = 256
 
 config.data_dir = "VILFWCut"
 config.pair_path = "eval/output1.csv"
