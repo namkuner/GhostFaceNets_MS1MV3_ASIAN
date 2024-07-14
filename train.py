@@ -43,8 +43,8 @@ world_size = 1
 def main(cfg):
     # get config
     # cfg = get_config(args.config)
-    gauth = GoogleAuth()
-    drive = GoogleDrive(gauth)
+    # gauth = GoogleAuth()
+    # drive = GoogleDrive(gauth)
     print("line 31: config: {}".format(cfg))
     # global control random seed
     setup_seed(seed=cfg.seed, cuda_deterministic=False)
@@ -208,7 +208,7 @@ def main(cfg):
                 if global_step % cfg.verbose == 0 and global_step > 0:
 
                     callback_verification(global_step, backbone)
-                    if epoch > 0.9*cfg.epoch :
+                    if epoch > 0.9*cfg.num_epoch :
                         if highest_acc >loss_am.avg:
                             checkpoint = {
                                 "epoch": epoch + 1,
@@ -220,9 +220,9 @@ def main(cfg):
                                 "author": "namkuner"
                             }
                             torch.save(checkpoint, os.path.join(cfg.output, "best.pt"))
-                            ckpt =[]
-                            ckpt.append(os.path.join(cfg.output, "best.pt") )
-                            uploadDrive(drive,ckpt)
+                            # ckpt =[]
+                            # ckpt.append(os.path.join(cfg.output, "best.pt") )
+                            # uploadDrive(drive,ckpt)
 
 
 
@@ -238,9 +238,9 @@ def main(cfg):
                 "author" : "namkuner"
             }
             torch.save(checkpoint, os.path.join(cfg.output, f"checkpoint_{epoch}.pt"))
-            ckpt = []
-            ckpt.append(os.path.join(cfg.output, f"checkpoint_{epoch}.pt"))
-            uploadDrive(drive, ckpt)
+            # ckpt = []
+            # ckpt.append(os.path.join(cfg.output, f"checkpoint_{epoch}.pt"))
+            # uploadDrive(drive, ckpt)
 
         path_module = os.path.join(cfg.output, "model.pt")
         torch.save(backbone.state_dict(), path_module)

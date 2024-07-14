@@ -7,6 +7,7 @@ from easydict import EasyDict as edict
 config = edict()
 
 #rec
+# config.rec = "ms1-mv3-asian-face"
 config.rec = "ms1-mv3-asian-face"
 # Margin Base Softmax
 config.margin_list = (1.0, 0.0, 0.4)
@@ -23,10 +24,10 @@ config.sample_rate = 1
 config.interclass_filtering_threshold = 0
 
 config.fp16 = False
-config.batch_size = 256
+config.batch_size = 512
 
 config.data_dir = "VILFWCut"
-config.pair_path = "eval/output1.csv"
+config.pair_path = "eval/output.csv"
 
 # For SGD
 config.optimizer = "sgd"
@@ -55,12 +56,18 @@ config.seed = 2048
 # dataload numworkers
 config.num_workers = 4
 # dataset
+# config.num_classes = 198
+# config.num_image = 10046
+# config.num_epoch = 20
+# config.warmup_epoch = 0
+# config.val_targets =[]
+
+#for smaill_dataset
 config.num_classes = 6579
 config.num_image = 300000
 config.num_epoch = 20
 config.warmup_epoch = 0
 config.val_targets =[]
-
 #for glint 180k
 # config.num_classes = 180855
 # config.num_image = 6753545
@@ -70,7 +77,7 @@ config.val_targets =[]
 # WandB Logger
 config.wandb_key = "daa38a012f1993bc802203d31f828a53c6605938"
 config.suffix_run_name = None
-config.using_wandb = True
+config.using_wandb = False
 config.wandb_entity = "namkunerr"
 config.wandb_project = "GhostFaceNets on Asian and MS1MV3 Dataset"
 config.wandb_log_all = True
