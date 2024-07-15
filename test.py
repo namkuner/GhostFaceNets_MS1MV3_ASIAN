@@ -39,4 +39,38 @@ def t():
     import torch;
     a = torch.ones(1, device="cuda")
 if __name__ =='__main__' :
-    pass
+    import re
+    import matplotlib.pyplot as plt
+
+    # Đường dẫn tới tệp log của bạn
+    log_file_path = 'training.log.txt'
+
+    # Đọc nội dung tệp log
+    with open(log_file_path, 'r') as file:
+        log_data = file.readlines()
+
+    # Khởi tạo danh sách để lưu trữ LearningRate và Global Step
+    learning_rates = []
+    global_steps = []
+
+    # Duyệt qua từng dòng trong log và tách giá trị LearningRate và Global Step
+    for line in log_data:
+        if 'LearningRate' in line and 'Global Step' in line:
+            lr_match = re.search(r'LearningRate (\d+\.\d+)', line)
+            step_match = re.search(r'Global Step: (\d+)', line)
+            if lr_match and step_match:
+                learning_rate = float(lr_match.group(1))
+                global_step = int(step_match.group(1))
+                learning_rates.append(learning_rate)
+                global_steps.append(global_step)
+
+    # Vẽ đồ thị bằng Matplotlib
+    fontsize = 15
+    plt.figure(figsize=(6, 6))
+    plt.plot(global_steps, learning_rates, linestyle='-', linewidth=2)
+    plt.xlabel('Iterations', fontsize=fontsize)  # x_label
+    plt.ylabel("Learning Rate", fontsize=fontsize)  # y_label
+    plt.title("Learning Rate vs Iterations", fontsize=fontsize)
+    plt.grid(True)
+    plt.savefig("learning_rate_plot.png", dpi=600, bbox_inches='tight')
+    plt.show()

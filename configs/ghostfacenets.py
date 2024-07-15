@@ -31,9 +31,9 @@ config.pair_path = "eval/output1.csv"
 
 # For SGD
 config.optimizer = "sgd"
-config.lr = 0.1
+config.lr = 0.02
 config.momentum = 0.9
-config.weight_decay = 0.0001
+config.weight_decay = 5e-4
 
 # For AdamW
 # config.optimizer = "adamw"
@@ -65,13 +65,13 @@ config.num_workers = 4
 #for smaill_dataset
 config.num_classes = 6579
 config.num_image = 300000
-config.num_epoch = 20
+config.num_epoch = 30
 config.warmup_epoch = 0
 config.val_targets =[]
 #for glint 180k
 # config.num_classes = 180855
 # config.num_image = 6753545
-# config.num_epoch = 40
+# config.num_epoch = 30
 # config.warmup_epoch = 0
 # config.val_targets =[]
 # WandB Logger

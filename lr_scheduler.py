@@ -5,7 +5,7 @@ import warnings
 
 
 class PolynomialLRWarmup(_LRScheduler):
-    def __init__(self, optimizer, warmup_iters, total_iters=5, power=1.0, last_epoch=-1, verbose=False):
+    def __init__(self, optimizer, warmup_iters, total_iters=5, power=2.0, last_epoch=-1, verbose=False):
         super().__init__(optimizer, last_epoch=last_epoch, verbose=verbose)
         self.total_iters = total_iters
         self.power = power
@@ -44,7 +44,9 @@ class PolynomialLRWarmup(_LRScheduler):
 
 
 if __name__ == "__main__":
+    import os
 
+    os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
     class TestModule(torch.nn.Module):
         def __init__(self) -> None:
             super().__init__()
@@ -57,16 +59,16 @@ if __name__ == "__main__":
     test_module = TestModule()
     test_module_pfc = TestModule()
     lr_pfc_weight = 1 / 3
-    base_lr = 10
-    total_steps = 1000
+    base_lr = 0.1
+    total_steps = 248420
 
     sgd = SGD([
         {"params": test_module.parameters(), "lr": base_lr},
         {"params": test_module_pfc.parameters(), "lr": base_lr * lr_pfc_weight}
     ], base_lr)
 
-    scheduler = PolynomialLRWarmup(sgd, total_steps // 10, total_steps, power=2)
-
+    # scheduler = PolynomialLRWarmup(sgd, total_steps // 10, total_steps, power=2)
+    scheduler = PolynomialLRWarmup(sgd, 0, total_steps, power=2.0)
     x = []
     y = []
     y_pfc = []
@@ -86,4 +88,5 @@ if __name__ == "__main__":
     plt.plot(x, y_pfc, linestyle='-', linewidth=2, )
     plt.xlabel('Iterations')  # x_label
     plt.ylabel("Lr")  # y_label
+    plt.grid(True)
     plt.savefig("tmp.png", dpi=600, bbox_inches='tight')
