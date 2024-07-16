@@ -8,7 +8,7 @@ config = edict()
 
 #rec
 # config.rec = "ms1-mv3-asian-face"
-config.rec = "ms1-mv3-asian-face"
+config.rec = "faces_glint"
 # Margin Base Softmax
 config.margin_list = (1.0, 0.0, 0.4)
 config.network = "ghostfacenets"
@@ -54,7 +54,7 @@ config.gradient_acc = 1
 config.seed = 2048
 
 # dataload numworkers
-config.num_workers = 4
+config.num_workers = 6
 # dataset
 # config.num_classes = 198
 # config.num_image = 10046
@@ -63,17 +63,17 @@ config.num_workers = 4
 # config.val_targets =[]
 
 #for smaill_dataset
-config.num_classes = 6579
-config.num_image = 300000
-config.num_epoch = 30
-config.warmup_epoch = 0
-config.val_targets =[]
-#for glint 180k
-# config.num_classes = 180855
-# config.num_image = 6753545
+# config.num_classes = 6579
+# config.num_image = 300000
 # config.num_epoch = 30
 # config.warmup_epoch = 0
 # config.val_targets =[]
+#for glint 180k
+config.num_classes = 180855
+config.num_image = 6753545
+config.num_epoch = 20
+config.warmup_epoch = 0
+config.val_targets =[]
 # WandB Logger
 config.wandb_key = "daa38a012f1993bc802203d31f828a53c6605938"
 config.suffix_run_name = None

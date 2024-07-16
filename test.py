@@ -56,7 +56,7 @@ if __name__ =='__main__' :
     # Duyệt qua từng dòng trong log và tách giá trị LearningRate và Global Step
     for line in log_data:
         if 'LearningRate' in line and 'Global Step' in line:
-            lr_match = re.search(r'LearningRate (\d+\.\d+)', line)
+            lr_match = re.search(r'Loss (\d+\.\d+)', line)
             step_match = re.search(r'Global Step: (\d+)', line)
             if lr_match and step_match:
                 learning_rate = float(lr_match.group(1))

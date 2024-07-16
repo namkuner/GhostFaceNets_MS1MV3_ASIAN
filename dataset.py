@@ -152,6 +152,7 @@ class MXFaceDataset(Dataset):
         label = header.label
         if not isinstance(label, numbers.Number):
             label = label[0]
+        print("label",label)
         label = torch.tensor(label, dtype=torch.long)
 
         sample = mx.image.imdecode(img).asnumpy()
