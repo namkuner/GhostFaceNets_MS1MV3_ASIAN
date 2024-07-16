@@ -5,7 +5,7 @@ import warnings
 
 
 class PolynomialLRWarmup(_LRScheduler):
-    def __init__(self, optimizer, warmup_iters, total_iters=5, power=2.0, last_epoch=-1, verbose=False):
+    def __init__(self, optimizer, warmup_iters, total_iters=5, power=3.0, last_epoch=-1, verbose=False):
         super().__init__(optimizer, last_epoch=last_epoch, verbose=verbose)
         self.total_iters = total_iters
         self.power = power
@@ -59,8 +59,8 @@ if __name__ == "__main__":
     test_module = TestModule()
     test_module_pfc = TestModule()
     lr_pfc_weight = 1 / 3
-    base_lr = 0.1
-    total_steps = 248420
+    base_lr = 0.011
+    total_steps = 600000
 
     sgd = SGD([
         {"params": test_module.parameters(), "lr": base_lr},
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     ], base_lr)
 
     # scheduler = PolynomialLRWarmup(sgd, total_steps // 10, total_steps, power=2)
-    scheduler = PolynomialLRWarmup(sgd, 0, total_steps, power=2.0)
+    scheduler = PolynomialLRWarmup(sgd, 0, total_steps, power=3.0)
     x = []
     y = []
     y_pfc = []

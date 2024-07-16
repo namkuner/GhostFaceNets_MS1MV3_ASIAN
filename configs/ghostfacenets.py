@@ -24,16 +24,16 @@ config.sample_rate = 1
 config.interclass_filtering_threshold = 0
 
 config.fp16 = False
-config.batch_size = 256
+config.batch_size = 210
 
 config.data_dir = "VILFWCut"
 config.pair_path = "eval/output1.csv"
 
 # For SGD
 config.optimizer = "sgd"
-config.lr = 0.02
+config.lr = 0.01
 config.momentum = 0.9
-config.weight_decay = 5e-4
+config.weight_decay = 1e-4
 
 # For AdamW
 # config.optimizer = "adamw"
