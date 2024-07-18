@@ -121,8 +121,8 @@ def main(cfg):
     margin_model.train()
 
     opt = torch.optim.SGD(
-    params=[{"params": backbone.parameters()}, {"params": margin_model.parameters()}],
-    lr=cfg.lr, momentum=0.9, weight_decay=cfg.weight_decay)
+    params=[{"params": backbone.parameters(), "lr" : cfg.lr}, {"params": margin_model.parameters(), "lr" : cfg.lr/3}],
+    momentum=0.9, weight_decay=cfg.weight_decay)
 
     cfg.total_batch_size = cfg.batch_size * world_size
     cfg.warmup_step = cfg.num_image // cfg.total_batch_size * cfg.warmup_epoch

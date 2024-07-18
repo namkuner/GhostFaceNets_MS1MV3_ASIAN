@@ -24,7 +24,7 @@ config.sample_rate = 1
 config.interclass_filtering_threshold = 0
 
 config.fp16 = False
-config.batch_size = 210
+config.batch_size = 128
 
 config.data_dir = "VILFWCut"
 config.pair_path = "eval/output1.csv"
@@ -65,7 +65,7 @@ config.num_workers = 6
 #for smaill_dataset
 config.num_classes = 6579
 config.num_image = 300000
-config.num_epoch = 20
+config.num_epoch = 30
 config.warmup_epoch = 0
 config.val_targets =[]
 #for glint 180k
