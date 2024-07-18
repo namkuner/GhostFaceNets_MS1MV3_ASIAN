@@ -195,8 +195,8 @@ def dali_data_iter(
         Size of the buffer that is used for shuffling. If random_shuffle is False, this parameter is ignored.
 
     """
-    rank: int = distributed.get_rank()
-    world_size: int = distributed.get_world_size()
+    rank: int = 0
+    world_size: int = 1
     import nvidia.dali.fn as fn
     import nvidia.dali.types as types
     from nvidia.dali.pipeline import Pipeline

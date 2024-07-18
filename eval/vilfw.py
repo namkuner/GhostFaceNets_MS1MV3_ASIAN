@@ -215,9 +215,16 @@ class VILWFDataset(Dataset):
 if __name__ == '__main__':
 
 
-
+    from mobilefacenet import MobileFaceNet
+    from torch.utils.data.dataloader import DataLoader
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    backbone = GhostFaceNetsV2(image_size=112, width=1.3, dropout=0.1).cuda()
-    backbone.eval()
-    same_acc, diff_acc, overall_acc, auc,threshs=evaluate("../VILFWCut", "output.csv", backbone, 2)
+    model = MobileFaceNet(512).to(device)
+    model.load_state_dict(
+        torch.load('../Weights/MobileFace_Net', map_location=lambda storage, loc: storage))
+    model.eval()
+    import  pandas as pd
+    all_img = pd.read_csv("output.csv")
+    data = VILWFDataset("..\VILFWCut",all_img)
+    dataloader = DataLoader(data,4)
+    same_acc, diff_acc, overall_acc, auc,threshs=evaluate(dataloader,model,4)
     print(same_acc,diff_acc,overall_acc,auc)

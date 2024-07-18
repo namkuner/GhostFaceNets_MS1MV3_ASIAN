@@ -57,7 +57,7 @@ if __name__ =='__main__' :
     for line in log_data:
         if 'LearningRate' in line and 'Global Step' in line:
             lr_match = re.search(r'Loss (\d+\.\d+)', line)
-            step_match = re.search(r'Global Step: (\d+)', line)
+            step_match = re.search(r'Epoch: (\d+)', line)
             if lr_match and step_match:
                 learning_rate = float(lr_match.group(1))
                 global_step = int(step_match.group(1))

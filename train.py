@@ -104,7 +104,7 @@ def main(cfg):
 
     # backbone = get_model(
     #     cfg.network, dropout=0.0, fp16=cfg.fp16, num_features=cfg.embedding_size).cuda()
-    backbone = GhostFaceNetsV2(image_size=IMAGE_SIZE,  width=1.3, dropout=0.1).cuda()
+    backbone = GhostFaceNetsV2(image_size=IMAGE_SIZE,  width=1.3, dropout=0.2).cuda()
     device = torch.device(f"cuda:{local_rank}" if torch.cuda.is_available() else "cpu")
     backbone = backbone.to(device)
     backbone.train()
@@ -250,6 +250,8 @@ def main(cfg):
             model = wandb.Artifact(artifact_name, type='model')
             model.add_file(path_module)
             wandb_logger.log_artifact(model)
+        if cfg.dali:
+            train_loader.reset()
 
 
     if rank == 0:
