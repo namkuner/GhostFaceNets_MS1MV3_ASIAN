@@ -31,7 +31,7 @@ config.pair_path = "eval/output1.csv"
 
 # For SGD
 config.optimizer = "sgd"
-config.lr = 0.007
+config.lr = 0.008
 config.momentum = 0.9
 config.weight_decay = 5e-4
 
@@ -65,7 +65,7 @@ config.num_workers = 6
 #for smaill_dataset
 config.num_classes = 6579
 config.num_image = 300000
-config.num_epoch = 10
+config.num_epoch = 20
 config.warmup_epoch = 0
 config.val_targets =[]
 #for glint 180k

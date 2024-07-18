@@ -16,7 +16,7 @@ class MarginModel(nn.Module):
         nn.init.kaiming_uniform_(self.weight, a=math.sqrt(5))
 
     def forward (self, input ):
-
+        input =  F.normalize(input)
         x = F.normalize(self.weight)
         logits=  F.linear(input ,x)
         logits = logits.clamp(-1,1)
